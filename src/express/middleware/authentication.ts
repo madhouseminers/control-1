@@ -16,7 +16,7 @@ export function requiresAnonymous(
   res: express.Response,
   next: express.NextFunction
 ) {
-  if (req.session.get("user")) {
+  if (req.session.user) {
     return res.redirect("/dashboard");
   }
   next();

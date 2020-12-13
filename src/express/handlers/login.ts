@@ -27,7 +27,7 @@ export async function post(req: express.Request, res: express.Response) {
 
     // Set user on the session
     delete user.rows[0].password;
-    req.session.set("user", user.rows[0]);
+    req.session.user = user.rows[0];
 
     // Redirect to /dashboard
     return res.redirect("/dashboard");

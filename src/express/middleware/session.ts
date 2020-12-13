@@ -58,6 +58,14 @@ export class Session {
     this.id = randomstring.generate();
     this.data = {};
   }
+
+  set user(user: User) {
+    this.data.user = user;
+    this.save();
+  }
+  get user(): User {
+    return this.data.user;
+  }
 }
 
 export default () => {
