@@ -19,15 +19,13 @@ export async function post(req: express.Request, res: express.Response) {
       [req.body.email]
     );
 
-    console.log(user);
-
     // Make sure we matched exactly 1 user
     if (user.rowCount != 1) {
       throw new Error("Invalid username or password");
     }
 
     // Check password
-    if (!argon.verify(user.rows[0].password, req.body.password)) {
+    if (!(await argon.verify(user.rows[0].password, req.body.password))) {
       throw new Error("Invalid username or password");
     }
 
@@ -38,7 +36,6 @@ export async function post(req: express.Request, res: express.Response) {
     // Redirect to /dashboard
     return res.redirect("/dashboard");
   } catch (e) {
-    console.log(e);
     error = true;
   }
 
