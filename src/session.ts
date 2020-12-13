@@ -5,7 +5,6 @@ import { promisify } from "util";
 import { User } from "./express";
 
 interface SessionData {
-  csrf_token?: string;
   user?: User;
 }
 declare global {

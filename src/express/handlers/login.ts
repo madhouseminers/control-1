@@ -5,9 +5,7 @@ import { User } from "..";
 import * as argon from "argon2";
 
 export function get(req: express.Request, res: express.Response) {
-  const csrf_token = randomstring.generate();
-  req.session.set("csrf_token", csrf_token);
-  res.render("login", { csrf_token, error: false });
+  res.render("login", { error: false });
 }
 
 export async function post(req: express.Request, res: express.Response) {
@@ -39,7 +37,5 @@ export async function post(req: express.Request, res: express.Response) {
     error = true;
   }
 
-  const csrf_token = randomstring.generate();
-  req.session.set("csrf_token", csrf_token);
-  res.render("login", { csrf_token, error });
+  res.render("login", { error, email: req.body.email });
 }
