@@ -1,6 +1,4 @@
 import * as express from "express";
-import * as randomstring from "randomstring";
-import { Pool } from "pg";
 import { User } from "..";
 import * as argon from "argon2";
 
@@ -12,7 +10,7 @@ export async function post(req: express.Request, res: express.Response) {
   let error = false;
   try {
     // Try and fetch the user from the DB
-    const user = await (req.app.get("db") as Pool).query<User>(
+    const user = await req.app.db.query<User>(
       "select * from users where email=$1",
       [req.body.email]
     );

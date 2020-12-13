@@ -19,7 +19,7 @@ async function createMigrationTable() {
   await db.query("create table if not exists migrations (name varchar(255))");
 }
 
-async function runMigration(migration: String) {
+async function runMigration(migration: string) {
   const m = require(`./${migration}`).default;
   await m(db);
   await db.query("insert into migrations (name) values ($1)", [migration]);

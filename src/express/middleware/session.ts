@@ -2,17 +2,10 @@ import * as express from "express";
 import * as randomstring from "randomstring";
 import * as redis from "redis";
 import { promisify } from "util";
-import { User } from "./express";
+import { User } from "..";
 
 interface SessionData {
   user?: User;
-}
-declare global {
-  namespace Express {
-    interface Request {
-      session?: Session;
-    }
-  }
 }
 
 const redis_client = redis.createClient();
@@ -21,8 +14,8 @@ const redis_set = promisify(redis_client.set).bind(redis_client);
 const redis_del = promisify(redis_client.del).bind(redis_client);
 const redis_exp = promisify(redis_client.expire).bind(redis_client);
 
-class Session {
-  id: String;
+export class Session {
+  id: string;
   data: SessionData;
 
   async save() {
@@ -30,7 +23,7 @@ class Session {
     await redis_exp(this.id, 1800);
   }
 
-  async load(id: String) {
+  async load(id: string) {
     let data: string;
     if (id) {
       data = await redis_get(id);
