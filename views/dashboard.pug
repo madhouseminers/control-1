@@ -1,7 +1,4 @@
-doctype html
-html
-    title Madhouse Control Panel
-body
-    p Welcome #{user.email}
+extends _layout.pug
 
-    a(href="/logout") Logout
+block content
+    p Welcome #{user.email}
