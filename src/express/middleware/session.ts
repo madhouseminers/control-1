@@ -8,7 +8,9 @@ interface SessionData {
   user?: User;
 }
 
-const redis_client = redis.createClient();
+const redis_client = redis.createClient(
+  process.env.REDIS_URL || "redis://localhost:6379/1"
+);
 const redis_get = promisify(redis_client.get).bind(redis_client);
 const redis_set = promisify(redis_client.set).bind(redis_client);
 const redis_del = promisify(redis_client.del).bind(redis_client);

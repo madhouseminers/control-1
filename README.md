@@ -12,7 +12,12 @@ To dev this system you will need to install some dependencies. The system requir
 - Redis
 - PostGres
 
-Set up a .env file with the [database connection information](https://node-postgres.com/features/connecting#environment-variables) (e.g. PGUSER, PGPASSWORD.)
+Set up a .env file with:
+
+- [database connection information](https://node-postgres.com/features/connecting#environment-variables) (e.g. PGUSER, PGPASSWORD.)
+- redis connection string
+
+There is an example env file at .env.example.
 
 Run the following commands to get up and running:
 
